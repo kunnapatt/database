@@ -34,6 +34,17 @@ class Paying extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("paying");
+        $this->belongTo( 'cid', 'customers' , 'cid' , array( 'alias' => 'cidcustomer')) ;
+        $this->belongTo( 'loanid', 'LoanInfomation', 'loanid', array( 'alias' => 'loanidloan')) ;
+        $this->hasManyToMany(
+            'payingid',
+            'Tracking',
+            'payingid',
+            'oid',
+            'DeptTracking',
+            'oid',
+            array( 'alias' => 'oiddept')
+        ) ;
     }
 
     /**
@@ -41,10 +52,10 @@ class Paying extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'paying';
-    }
+    // public function getSource()
+    // {
+    //     return 'paying';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -68,4 +79,15 @@ class Paying extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getDeptTracking(){
+        return $this->oiddept ;
+    }
+
+    public function getLoanInfomation() {
+        return $this->loadidloan ;
+    }
+
+    public function getCustomers(){
+        return $this->cidcustomer ;
+    }
 }

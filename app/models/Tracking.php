@@ -28,6 +28,10 @@ class Tracking extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("tracking");
+        $this->belongsTo('oid','DeptTrackers', 'oid',array('alias' => 'alias_deptracker')) ;
+        $this->belongsTo('cid','Customers', 'cid',array('alias' => 'alias_customer'));
+        $this->belongsTo('loanid','LoanInformation', 'loanid',array('alias' => 'alias_loan')) ;
+        $this->belongsTo('payingid','Paying', 'payingid',array('alias' => 'alias_paying')) ;
     }
 
     /**
@@ -35,10 +39,10 @@ class Tracking extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'tracking';
-    }
+    // public function getSource()
+    // {
+    //     return 'tracking';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -62,4 +66,19 @@ class Tracking extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getPaying() {
+        return $this->alias_paying ;
+    }
+
+    public function getLoanInfomatio() {
+        return $this->alias_Loan ;
+    }
+
+    public function getCustomers() {
+        return $this->alias_customer ;
+    }
+
+    public function getDeptTracker() {
+        return $this->alias_deptracker ;
+    }
 }

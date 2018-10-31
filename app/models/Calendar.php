@@ -28,6 +28,8 @@ class Calendar extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("calendar");
+        $this->belongTo('cid', 'Customers', 'cid', array( 'alias' => 'cidcustomer')) ;
+        $this->belongTo('oid', 'officers', 'oid', array( 'alias' => 'cidofficer')) ;
     }
 
     /**
@@ -35,10 +37,10 @@ class Calendar extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'calendar';
-    }
+    // public function getSource()
+    // {
+    //     return 'calendar';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -60,6 +62,14 @@ class Calendar extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public function getCustomers(){
+        return $this->cidcustomer ;
+    }
+
+    public function getOfficers(){
+        return $this->cidofficer ;
     }
 
 }

@@ -34,6 +34,7 @@ class Credit extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("credit");
+        $this->belongTo('account_id', 'Account', 'account_id', array( 'alias' => 'accountid' )) ;
     }
 
     /**
@@ -41,10 +42,10 @@ class Credit extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'credit';
-    }
+    // public function getSource()
+    // {
+    //     return 'credit';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -68,4 +69,7 @@ class Credit extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getAccount(){
+        return $this->accountid ;
+    }
 }

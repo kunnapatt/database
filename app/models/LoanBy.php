@@ -28,6 +28,8 @@ class LoanBy extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("loan_by");
+        $this->belongTo('cid', 'Customers', 'cid', array('alias' => 'cidcustomer')) ;
+        $this->belongTo('loanid', 'LoanInformation', 'loanid', array( 'alias' => 'cidloan')) ;
     }
 
     /**
@@ -35,10 +37,10 @@ class LoanBy extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'loan_by';
-    }
+    // public function getSource()
+    // {
+    //     return 'loan_by';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -62,4 +64,11 @@ class LoanBy extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getCustomers(){
+        return $this->cidcustomer ;
+    }
+
+    public function getLoanInformation() {
+        return $this->cidloan ;
+    }
 }

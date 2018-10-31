@@ -16,6 +16,17 @@ class DeptTrackers extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("dept_trackers");
+        $this->belongsTo('oid', 'Officers', 'oid', array('alias' => 'oidoff'));
+        $this->hasManyToMany(
+            'oid',
+            'Tracking',
+            'oid', 'payingid',
+            'Paying',
+            'payingid',
+            array(
+                'alias' => 'payingid'
+            )
+        );
     }
 
     /**
@@ -23,10 +34,10 @@ class DeptTrackers extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'dept_trackers';
-    }
+    // public function getSource()
+    // {
+    //     return 'dept_trackers';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -50,4 +61,11 @@ class DeptTrackers extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getOfficers() {
+        return $this->cidoff ;
+    }
+
+    public function getTracking() {
+        return $this->payingid ;
+    }
 }

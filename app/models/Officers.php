@@ -48,10 +48,13 @@ class Officers extends \Phalcon\Mvc\Model
     /**
      * Initialize method for model.
      */
-    public function initialize()
+    public function initialize() 
     {
         $this->setSchema("mydb");
         $this->setSource("officers");
+        $this->hasOne('oid', 'CrmOfficers', 'oid', array( 'alias' => 'oidcrm')) ;
+        $this->hasOne('oid', 'DeptTrackers', 'oid', array( 'alias' => 'oiddept')) ;
+        $this->hasMany('oid', 'Calendar', 'oid' , array( 'alias' => 'oidcalen')) ;
     }
 
     /**
@@ -59,10 +62,10 @@ class Officers extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'officers';
-    }
+    // public function getSource()
+    // {
+    //     return 'officers';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -86,4 +89,15 @@ class Officers extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getCrmOfficer() {
+        return $this->oidcrm ;
+    }
+
+    public function getDeptTrackers() {
+        return $this->oiddept ;
+    }
+
+    public function getCalendar() {
+        return $this->oidcalen ;
+    }
 }

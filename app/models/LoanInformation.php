@@ -34,6 +34,15 @@ class LoanInformation extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("loan_information");
+        $this->hasManyToMany(
+            'loanid',
+            'LoanBy',
+            'loanid',
+            'cid',
+            'Customers',
+            'cid',
+            array( 'alias' => 'cidcustomer')
+        ) ;
     }
 
     /**
@@ -41,10 +50,10 @@ class LoanInformation extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'loan_information';
-    }
+    // public function getSource()
+    // {
+    //     return 'loan_information';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -68,4 +77,7 @@ class LoanInformation extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+    public function getCustomer(){
+        return $this->cidcustomer ;
+    }
 }

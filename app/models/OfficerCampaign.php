@@ -1,6 +1,6 @@
 <?php
 
-class LoanBy(asset) extends \Phalcon\Mvc\Model
+class OfficerCampaign extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,13 +13,13 @@ class LoanBy(asset) extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $loanid;
+    public $oid;
 
     /**
      *
      * @var string
      */
-    public $asset;
+    public $ticketid;
 
     /**
      * Initialize method for model.
@@ -27,7 +27,9 @@ class LoanBy(asset) extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema("mydb");
-        $this->setSource("loan_by(asset)");
+        $this->setSource("provide_information_to");
+        $this->belongTo('oid', 'CrmOfficer', 'oid', array( 'alias' => 'oidcrm')) ;
+        $this->belongTo('cid', 'Customers', 'cid', array( 'alias' => 'cidcustomer')) ;
     }
 
     /**
@@ -35,16 +37,16 @@ class LoanBy(asset) extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'loan_by(asset)';
-    }
+    // public function getSource()
+    // {
+    //     return 'provide_information_to';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return LoanBy(asset)[]|LoanBy(asset)|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return ProvideInformationTo[]|ProvideInformationTo|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -55,11 +57,18 @@ class LoanBy(asset) extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return LoanBy(asset)|\Phalcon\Mvc\Model\ResultInterface
+     * @return ProvideInformationTo|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
     }
 
+    public function getCustomers(){
+        return $this->cidcustomer ;
+    }
+
+    public function getCrmOfficer(){
+        return $this->oidcrm ;
+    }
 }

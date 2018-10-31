@@ -16,6 +16,16 @@ class CrmOfficer extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("crm_officer");
+
+        $this->belongTO('oid', 'officers', 'oid', array( 'alias' => 'cidofficer')) ;
+        $this->hasManyToMany(
+            'oid',
+            'OfficerCampaign',
+            'oid',
+            'cid',
+            'customers',
+            'cid',
+            array( 'alias' => 'cidoffcam')) ;
     }
 
     /**
@@ -23,10 +33,10 @@ class CrmOfficer extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'crm_officer';
-    }
+    // public function getSource()
+    // {
+    //     return 'crm_officer';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -49,5 +59,12 @@ class CrmOfficer extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
+    
+    public function getOfficers(){
+        return $this->cidofficer ;
+    }
 
+    public function getOfficerCampaign(){
+        return $this->cidoffcam ;
+    }
 }

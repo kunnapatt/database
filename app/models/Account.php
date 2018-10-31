@@ -34,6 +34,8 @@ class Account extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("account");
+        $this->hasOne('cid', 'Customers', 'cid', array('alias' => 'cidcustomer')) ;
+        $this->hasMany('account_id', 'Credit', 'account_id', array('alias' => 'accountcredit')) ;
     }
 
     /**
@@ -41,10 +43,12 @@ class Account extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'account';
-    }
+
+    // comment
+    // public function getSource()
+    // {
+    //     return 'account';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -66,6 +70,14 @@ class Account extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public function getCustomers(){
+        return $this->cidcustomer ;
+    }
+
+    public function getAccount(){
+        return $this->accountcredit ;
     }
 
 }
