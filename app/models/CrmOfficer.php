@@ -2,69 +2,43 @@
 
 class CrmOfficer extends \Phalcon\Mvc\Model
 {
-
-    /**
-     *
-     * @var string
-     */
     public $oid;
-
-    /**
-     * Initialize method for model.
-     */
     public function initialize()
     {
         $this->setSchema("mydb");
         $this->setSource("crm_officer");
-
-        $this->belongTO('oid', 'officers', 'oid', array( 'alias' => 'cidofficer')) ;
+        $this->belongsTo('oid', 'Officers', 'oid', array('alias' => 'officer'));
+        $this->hasMany("oid", "CarryRequest", "oid", array('alias' => 'alias_request'));
         $this->hasManyToMany(
             'oid',
-            'OfficerCampaign',
-            'oid',
+            'CarryRequest',
+            'oid', 'cid',
+            'Customers',
             'cid',
-            'customers',
-            'cid',
-            array( 'alias' => 'cidoffcam')) ;
+            array(
+                'alias' => 'alias_customers'
+            )
+        );
     }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    // public function getSource()
-    // {
-    //     return 'crm_officer';
-    // }
-
-    /**
-     * Allows to query a set of records that match the specified conditions
-     *
-     * @param mixed $parameters
-     * @return CrmOfficer[]|CrmOfficer|\Phalcon\Mvc\Model\ResultSetInterface
-     */
     public static function find($parameters = null)
     {
         return parent::find($parameters);
     }
-
-    /**
-     * Allows to query the first record that match the specified conditions
-     *
-     * @param mixed $parameters
-     * @return CrmOfficer|\Phalcon\Mvc\Model\ResultInterface
-     */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
     }
-    
-    public function getOfficers(){
-        return $this->cidofficer ;
+    public function getOfficer()
+    {
+        return $this->alias_officer;
+    }
+    public function getCustomers()
+    {
+        return $this->alias_customers;
+    }
+    public function getRequest()
+    {
+        return $this->alias_request;
     }
 
-    public function getOfficerCampaign(){
-        return $this->cidoffcam ;
-    }
 }

@@ -36,13 +36,14 @@ class LoanInformation extends \Phalcon\Mvc\Model
         $this->setSource("loan_information");
         $this->hasManyToMany(
             'loanid',
-            'LoanBy',
-            'loanid',
-            'cid',
+            'LoanBy',//table 
+            'loanid', 'cid',
             'Customers',
             'cid',
-            array( 'alias' => 'cidcustomer')
-        ) ;
+            array(
+                'alias' => 'alias_customers'
+            )
+        );
     }
 
     /**
@@ -76,8 +77,8 @@ class LoanInformation extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
-    public function getCustomer(){
-        return $this->cidcustomer ;
+    public function getCustomers()
+    {
+        return $this->alias_customers;
     }
 }

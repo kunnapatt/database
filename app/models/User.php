@@ -41,10 +41,10 @@ class User extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
-        return 'user';
-    }
+    // public function getSource()
+    // {
+    //     return 'user';
+    // }
 
     /**
      * Allows to query a set of records that match the specified conditions

@@ -16,8 +16,18 @@
           .ablack {
             color: black ;
           }
-           
+          .sidenav {
+            height:100% ;
+            left:0 ;
+            top: 0 ;
+            position:fixed ;
+            width:200px ;
+            background:#111 ;
+            transition:0.5s ;
+          }
+
         </style>
+        
     </head>
     <body>
          
@@ -36,7 +46,7 @@
         <!--  -->
         
         <?php if ( $this->session->has('sid') ) { ?>
-        <nav class="navbar navbar-expand-lg " style="padding:10px 30px;background-color:#FFA500;color:black">
+        <nav class="navbar navbar-expand-lg " style="padding:10px 30px;background-color:rgb(255,155,0,0.8);color:black">
             <div class="container" >
                 <!-- <a class="navbar-brand" href="index" style="color:black">Logo</a> -->
                 <?php echo $this->tag->linkTo('index', "<div style='color:black;padding:10px'><h5>Logo</h5></div>") ?>
@@ -49,7 +59,8 @@
                     <!-- <li class="nav-item active"><a class="nav-link" href="index" style="color:black">Home</a></li> -->
                     <?php echo $this->tag->linkTo('index', "<div style='color:black;padding:10px'><h5>Home</h5></div>") ?>
                     <li class="nav-item"><a class="nav-link" href="#loan" style="color:black">Loan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#statement" style="color:black">Statement</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="user/statement" style="color:black">Statement</a></li> -->
+                    <?php echo $this->tag->linkTo('user/statement', "<div style='color:black;padding:10px'><h5>Statement</h5></div>") ?>
                     
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -65,11 +76,35 @@
             </div>
             
         </nav>
-        <?php } else{ 
-            // var_dump("HELLO") ;
-            // exit() ; ?>
+        <?php } else if ( $this->session->has('id') ) { ?>
+            <nav class="navbar navbar-inverse navbar-fixed-left navbar-expand-lg navbar-dark bg-dark " style="padding:10px 30px;color:white">
+                <div class="container" >
+                    <?php echo $this->tag->linkTo('index', "<div style='color:white ;padding:10px'><h5>Logo</h5></div>") ?>
+                    
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavb" aria-controls="navbarNavb" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars fa-2x"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavb" >
+                    <ul class="navbar-nav">
+                        <?php echo $this->tag->linkTo('index', "<div style='color:white;padding:10px'><h5>Home</h5></div>") ?>
+                        <?php echo $this->tag->linkTo('officer/calendar', "<div style='color:white;padding:10px'><h5>Calendar</h5></div>") ?>
+                        <?php echo $this->tag->linkTo('officer/dept', "<div style='color:white;padding:10px'><h5>Dept</h5></div>") ?>
+                        <?php echo $this->tag->linkTo('officer/customer?id=', "<div style='color:white;padding:10px'><h5>Customer</h5></div>") ?>
+                        
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item float-md-right" style="padding:15px"><?php echo $this->tag->linkTo('officer/logout', '<button class="btn btn-secondary" style="padding:10px 20px">Logout</button>') ?></li>
+                    </ul>
+                </div>
+
+                </div>
             
-            <nav class="navbar navbar-expand-lg " style="padding:10px 30px;background-color:#FFA500;color:black">
+            </nav>
+
+
+        <?php } else { ?>
+            
+            <nav class="navbar navbar-expand-lg  " style="padding:10px 30px;background-color:rgb(255,155,0,0.8);color:black">
             <div class="container" >
                 <!-- <a class="navbar-brand" href="index" style="color:black">Logo</a> -->
                 <?php echo $this->tag->linkTo('index', "<div style='color:black;padding:10px'><h5>Logo</h5></div>") ?>
@@ -82,7 +117,8 @@
                     <!-- <li class="nav-item active"><a class="nav-link" href="index" style="color:black">Home</a></li> -->
                     <?php echo $this->tag->linkTo('index', "<div style='color:black;padding:10px'><h5>Home</h5></div>") ?>
                     <li class="nav-item"><a class="nav-link" href="#loan" style="color:black">Loan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#statement" style="color:black">Statement</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="user/statement" style="color:black">Statement</a></li> -->
+                    <?php echo $this->tag->linkTo('user/statement', "<div style='color:black;padding:10px'><h5>Statement</h5></div>") ?>
                     
                 </ul>
                 <ul class="navbar-nav ml-auto">

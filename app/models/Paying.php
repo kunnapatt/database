@@ -2,7 +2,7 @@
 
 class Paying extends \Phalcon\Mvc\Model
 {
-
+    public $payingid;
     /**
      *
      * @var string
@@ -34,17 +34,18 @@ class Paying extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("paying");
-        $this->belongTo( 'cid', 'customers' , 'cid' , array( 'alias' => 'cidcustomer')) ;
-        $this->belongTo( 'loanid', 'LoanInfomation', 'loanid', array( 'alias' => 'loanidloan')) ;
+        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'customer'));
+        $this->belongsTo('loanid', 'LoanInformation', 'loanid', array('alias' => 'loan'));
         $this->hasManyToMany(
             'payingid',
             'Tracking',
-            'payingid',
+            'payingid', 'oid',
+            'DeptTrackers',
             'oid',
-            'DeptTracking',
-            'oid',
-            array( 'alias' => 'oiddept')
-        ) ;
+            array(
+                'alias' => 'alias_depttrackers'
+            )
+        );
     }
 
     /**
@@ -78,16 +79,17 @@ class Paying extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
-    public function getDeptTracking(){
-        return $this->oiddept ;
+    public function getCustomer()
+    {
+        return $this->alias_customers;
+    }
+    public function getLoan()
+    {
+        return $this->alias_loan;
+    }
+    public function getDepttrackers()
+    {
+        return $this->alias_depttrackers;
     }
 
-    public function getLoanInfomation() {
-        return $this->loadidloan ;
-    }
-
-    public function getCustomers(){
-        return $this->cidcustomer ;
-    }
 }

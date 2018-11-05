@@ -1,0 +1,234 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            var url = "id";
+            var value = "";
+            $(document).ready(function() {
+                $("#selectcid").change(function(){
+                    $(this).val() ;
+                    value = $(this).val();
+                    window.location.href = '?' + url + '=' + value + '&' ;
+                });
+            });
+
+            
+        </script>
+        <script>
+            $(document).ready(function()){
+                $("#selectcredit").change(function(){
+                    $(this).val() ;
+                    value1 = $(this).val();
+                    window.location.href = '?' + url + '=' + value1 + '&' ;
+                })
+            });
+        </script>
+
+    </head>
+    <body style="background-color:#222;color:white">
+    <div class="row" style="padding:30px"><h1>Customer</h1></div>
+    <div class="col-12" style="padding:20px 30px 0px">
+        <form method="post">
+                <div class="row">
+                    <div class="col-10 mr-auto form-group">
+                        <select class="form-control" id="selectcid" >
+                            <option selected disabled>Select Customer</option>
+                            <?php for ($i = 0 ; $i < count($cid) ; $i++ ) { ?>
+                                <option value="<?php echo $cid[$i] ?>"><?php echo $cid[$i] ?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                </div>
+        </form>
+        
+    </div>
+    
+    <?php if ( $_GET['id'] != null ) { ?>
+        <div style="padding:10px;">
+            <div class="card" style="color:black">
+                <div class="card-header">
+                    <h4>History (#<?php echo$id?>)</h4>
+                </div>
+                <div class="card-body">
+                    <h5>
+                        <div class="row">
+                            <div class="col-4">
+                                <div  class="row">
+                                    <div class="col-6" style="text-align:end">
+                                        ID : 
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value="<?php echo $id ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-6" style="text-align:end">
+                                        Name :
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value="<?php echo $fname ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-6" style="text-align:end">
+                                        Surname : 
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value="<?php echo $sname ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding:30px 0px 0px">
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-6" style="text-align:end">
+                                        BirthDay :
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value="<?php echo $dob ?>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-6" style="text-align:end">
+                                        Email : 
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value="<?php echo $email ?>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-6" style="text-align:end">
+                                        Phone : 
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" value="<?php echo $pnum ?>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding:30px 0px 0px">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4" style="text-align:end">
+                                        Home : 
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" value="<?php echo $address ?>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4" style="text-align:end">
+                                        Work : 
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" value="<?php echo $work ?>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div style="padding:10px 30px 30px">
+        <div class="card" style="color:black">
+            <div class="card-header">
+                <h4>History (#)</h4>
+            </div>
+            <div class="card-body">
+                <h5>
+                    <div class="row">
+                        <div class="col-4">
+                            ID : 
+                        </div>
+                        <div class="col-4">
+                            Name : 
+                        </div>
+                        <div class="col-4">
+                            Surname : 
+                        </div>
+                    </div>
+                    <div class="row" style="padding:30px 0px 0px">
+                        <div class="col-4">
+                            BirthDay : 
+                        </div>
+                        <div class="col-4">
+                            Email : 
+                        </div>
+                        <div class="col-4">
+                            Phone : 
+                        </div>
+                    </div>
+                    <div class="row" style="padding:30px 0px 0px">
+                        <div class="col-6">
+                            Home : 
+                        </div>
+                        <div class="col-6">
+                            Work :
+                        </div>
+                    </div>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+    <div class="row border border-light"></div>
+
+    <h2 style="padding:10px;color:white">Statement</h2>
+    <div style="padding:10px"> 
+        <!-- <select class="form-control" id="selectcredit">
+            <option selected disabled>Select Credit</option>
+            <?php for ( $i = 0 ; $i < count($credit) ; $i++) { ?>
+                    <option value="<?php echo $credit[$i] ?>"><?php echo $credit[$i] ?></option>
+            <?php } ?>
+        </select> -->
+    </div>
+    <div style="padding:10px">
+        <table class="table table-bordered table-light" style="color:black">
+            <thead>
+                <tr class="">
+                    <th scope="col">Date</th>
+                    <!-- <th scope="col">id</th> -->
+                    <th scope="col">Balance</th>
+                    <th scope="col">payingid</th>
+                    <th scope="col">loanid</th>
+                    <!-- <th scope="col">Address</th> -->
+                    <!-- <th scope="col">Email</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ( $_GET['id'] != null ) { ?>
+                    <?php for ( $i = 0 ; $i < count($loanid) ; $i++ ) { ?>
+                    <tr>
+                        <th scope="row"><?php echo $datepay[$i] ?></th>
+                        <td><?php echo $amount[$i] ?></td>
+                        <td><?php echo $payid[$i] ?></td>
+                        <td><?php echo $loanid[$i] ?></td>
+                    </tr>
+                    <?php } ?>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+
+    </body>
+
+</html>

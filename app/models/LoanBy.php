@@ -2,34 +2,15 @@
 
 class LoanBy extends \Phalcon\Mvc\Model
 {
-
-    /**
-     *
-     * @var string
-     */
     public $cid;
-
-    /**
-     *
-     * @var string
-     */
     public $loanid;
-
-    /**
-     *
-     * @var string
-     */
     public $asset;
-
-    /**
-     * Initialize method for model.
-     */
     public function initialize()
     {
         $this->setSchema("mydb");
         $this->setSource("loan_by");
-        $this->belongTo('cid', 'Customers', 'cid', array('alias' => 'cidcustomer')) ;
-        $this->belongTo('loanid', 'LoanInformation', 'loanid', array( 'alias' => 'cidloan')) ;
+        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'customer'));
+        $this->belongsTo('loanid', 'LoanInformation', 'loanid', array('alias' => 'loan'));
     }
 
     /**
@@ -63,12 +44,13 @@ class LoanBy extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
-    public function getCustomers(){
-        return $this->cidcustomer ;
+    public function getCustomer()
+    {
+        return $this->alias_customer;
+    }
+    public function getLoan()
+    {
+        return $this->alias_loan;
     }
 
-    public function getLoanInformation() {
-        return $this->cidloan ;
-    }
 }

@@ -7,7 +7,7 @@ class Credit extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $cnumber;
+    public $acount_id;
 
     /**
      *
@@ -21,11 +21,6 @@ class Credit extends \Phalcon\Mvc\Model
      */
     public $limit;
 
-    /**
-     *
-     * @var string
-     */
-    public $anumber;
 
     /**
      * Initialize method for model.
@@ -34,7 +29,7 @@ class Credit extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("credit");
-        $this->belongTo('account_id', 'Account', 'account_id', array( 'alias' => 'accountid' )) ;
+        $this->belongsTo("acount_id", "Account", "account_id", array('alias' => 'alias_account'));
     }
 
     /**
@@ -68,8 +63,8 @@ class Credit extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
-    public function getAccount(){
-        return $this->accountid ;
+    public function getAccount()
+    {
+        return $this->alias_account;
     }
 }
