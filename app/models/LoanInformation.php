@@ -34,6 +34,8 @@ class LoanInformation extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("loan_information");
+        $this->hasMany("loanid", "Paying", "loanid", array('alias' => 'alias_paying')) ;
+        $this->hasMany("loanid", "LoanBy", "loanid", array('alias' => 'alias_loanby')) ;
         $this->hasManyToMany(
             'loanid',
             'LoanBy',//table 
@@ -80,5 +82,11 @@ class LoanInformation extends \Phalcon\Mvc\Model
     public function getCustomers()
     {
         return $this->alias_customers;
+    }
+    public function getPaying(){
+        return $this->alias_paying ;
+    }
+    public function getLoanBy(){
+        return $this->alias_loanby ;
     }
 }

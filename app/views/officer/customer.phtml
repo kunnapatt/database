@@ -28,7 +28,7 @@
     <body style="background-color:#222;color:white">
     <div class="row" style="padding:30px"><h1>Customer</h1></div>
     <div class="col-12" style="padding:20px 30px 0px">
-        <form method="post">
+        <!-- <form method="post"> -->
                 <div class="row">
                     <div class="col-10 mr-auto form-group">
                         <select class="form-control" id="selectcid" >
@@ -40,17 +40,18 @@
                     </div>
                     
                 </div>
-        </form>
+        <!-- </form> -->
         
     </div>
     
     <?php if ( $_GET['id'] != null ) { ?>
-        <div style="padding:10px;">
+        <div style="padding:10px 30px 30px;">
             <div class="card" style="color:black">
                 <div class="card-header">
                     <h4>History (#<?php echo$id?>)</h4>
                 </div>
                 <div class="card-body">
+                    <form method="post">
                     <h5>
                         <div class="row">
                             <div class="col-4">
@@ -59,7 +60,7 @@
                                         ID : 
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" value="<?php echo $id ?>">
+                                        <input type="text" class="form-control" id="id" value="<?php echo $id ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +70,7 @@
                                         Name :
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" value="<?php echo $fname ?>">
+                                        <input type="text" class="form-control" name="name" value="<?php echo $fname ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +80,7 @@
                                         Surname : 
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" value="<?php echo $sname ?>">
+                                        <input type="text" class="form-control" name="surname" value="<?php echo $sname ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +92,7 @@
                                         BirthDay :
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" value="<?php echo $dob ?>">
+                                        <input type="text" class="form-control" name="dateof" value="<?php echo $dob ?>" required>
                                         
                                     </div>
                                 </div>
@@ -102,7 +103,7 @@
                                         Email : 
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" value="<?php echo $email ?>">
+                                        <input type="text" class="form-control" name="mail" value="<?php echo $email ?>" required>
                                         
                                     </div>
                                 </div>
@@ -113,7 +114,7 @@
                                         Phone : 
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" value="<?php echo $pnum ?>">
+                                        <input type="text" class="form-control" name="phone" value="<?php echo $pnum ?>" required>
                                         
                                     </div>
                                 </div>
@@ -126,7 +127,7 @@
                                         Home : 
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" value="<?php echo $address ?>">
+                                        <input type="text" class="form-control" name="home" value="<?php echo $address ?>" required>
                                         
                                     </div>
                                 </div>
@@ -137,58 +138,62 @@
                                         Work : 
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" value="<?php echo $work ?>">
+                                        <input type="text" class="form-control" name="workat" value="<?php echo $work ?>" required>
                                         
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center" style="padding:40px 20px 5px">
+                            <button type="submit" class="btn btn-primary" style="padding:10px 10px">Submit</button>
+                        </div>
+                    </h5>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div style="padding:10px 30px 30px">
+            <div class="card" style="color:black">
+                <div class="card-header">
+                    <h4>History (#)</h4>
+                </div>
+                <div class="card-body">
+                    <h5>
+                        <div class="row">
+                            <div class="col-4">
+                                ID : 
+                            </div>
+                            <div class="col-4">
+                                Name : 
+                            </div>
+                            <div class="col-4">
+                                Surname : 
+                            </div>
+                        </div>
+                        <div class="row" style="padding:30px 0px 0px">
+                            <div class="col-4">
+                                BirthDay : 
+                            </div>
+                            <div class="col-4">
+                                Email : 
+                            </div>
+                            <div class="col-4">
+                                Phone : 
+                            </div>
+                        </div>
+                        <div class="row" style="padding:30px 0px 0px">
+                            <div class="col-6">
+                                Home : 
+                            </div>
+                            <div class="col-6">
+                                Work :
                             </div>
                         </div>
                     </h5>
                 </div>
             </div>
         </div>
-    <?php } else { ?>
-        <div style="padding:10px 30px 30px">
-        <div class="card" style="color:black">
-            <div class="card-header">
-                <h4>History (#)</h4>
-            </div>
-            <div class="card-body">
-                <h5>
-                    <div class="row">
-                        <div class="col-4">
-                            ID : 
-                        </div>
-                        <div class="col-4">
-                            Name : 
-                        </div>
-                        <div class="col-4">
-                            Surname : 
-                        </div>
-                    </div>
-                    <div class="row" style="padding:30px 0px 0px">
-                        <div class="col-4">
-                            BirthDay : 
-                        </div>
-                        <div class="col-4">
-                            Email : 
-                        </div>
-                        <div class="col-4">
-                            Phone : 
-                        </div>
-                    </div>
-                    <div class="row" style="padding:30px 0px 0px">
-                        <div class="col-6">
-                            Home : 
-                        </div>
-                        <div class="col-6">
-                            Work :
-                        </div>
-                    </div>
-                </h5>
-            </div>
-        </div>
-    </div>
     <?php } ?>
     <div class="row border border-light"></div>
 

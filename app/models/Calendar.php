@@ -9,8 +9,8 @@ class Calendar extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("calendar");
-        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'customer'));
-        $this->belongsTo('oid', 'Officers', 'oid', array('alias' => 'officer'));
+        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'alias_customer'));
+        $this->belongsTo('oid', 'Officers', 'oid', array('alias' => 'alias_officer'));
     }
     public static function find($parameters = null)
     {

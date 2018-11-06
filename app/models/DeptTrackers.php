@@ -7,22 +7,22 @@ class DeptTrackers extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("dept_trackers");
-        $this->belongsTo('oid', 'Officers', 'oid', array('alias' => 'officer'));
+        $this->belongsTo('oid', 'officers', 'oid', array('alias' => 'alias_officer'));
         $this->hasManyToMany(
             'oid',
             'Tracking',
             'oid', 'cid',
-            'Customers',
+            'customers',
             'cid',
             array(
                 'alias' => 'alias_track'
             )
         );
     }
-    public function getSource()
-    {
-        return 'dept_trackers';
-    }
+    // public function getSource()
+    // {
+    //     return 'dept_trackers';
+    // }
     public static function find($parameters = null)
     {
         return parent::find($parameters);
@@ -31,7 +31,7 @@ class DeptTrackers extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-    public function getPaying()
+    public function getTrack()
     {
         return $this->alias_track;
     }

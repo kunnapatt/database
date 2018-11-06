@@ -9,7 +9,7 @@
 
                 $id = $user->cid ;
                 $fname = $user->fname ;
-                $sname = $user->Sname ;
+                $sname = $user->sname ;
                 $date = $user->DOB ;
                 $gen = $user->gender ;
                 $phone = $user->pnumber ;
@@ -55,26 +55,15 @@
                     $new = $this->request->getPost("newpass") ;
                     $confirm = $this->request->getPost("conpass") ;
 
-                    // $users = Customers();
-                    // var_dump($current) ;
-                    // exit() ;
-
                     if ( $pass == $current ){
-                        // var_dump($co) ;
-                        // var_dump("User = $pass") ;
-                        // var_dump($current) ;
-                        // exit() ;
 
                         if ( $new == $confirm ) {
-                            // exit() ;
+
                             $user->password = $new ;
                             $user->save() ;
                             var_dump("OK Success") ;
-                            // exit();
                             $this->response->redirect("user") ;
                         }else{
-                            //
-                            // $this->response->redirect("user/change") ;
                             var_dump("Error new not equal comfirm") ;
                             exit() ;
                         }
@@ -107,7 +96,7 @@
                 // exit() ;
 
                 foreach( $user as $pay ){
-                    $i = $pay->getpay()->toArray() ;
+                    $i = $pay->getPaying()->toArray() ;
                     
                 }
                 $count = 0;
@@ -133,30 +122,17 @@
             if ( $this->session->has('sid') ){
                 $co = $this->session->get('sid') ;
                 $user = Customers::find("cid = '$co'") ;
-                
-                // $date = ($user->getCalendar())->date ;
-                
                 $d = Calendar::find("oid = '232323'") ;
 
                 foreach( $d as $dd ){
                     $raiwa[] = $dd->date ;
-                    // var_dump($raiwa) ;
                 } 
 
                 foreach ( $user as $a ){
                     $b = ($a->getCalendar()->toArray()) ;
                     var_dump($b) ;
                 }
-                foreach ( $b as $c ){
-                    // $date1[] = $c['date'] ;
-                }
-                // $this->view->date = $date ;
-                // var_dump(($date)) ;
-                // var_dump($d->date) ;
-                // var_dump($raiwa) ;
-                // exit() ;
                 
-
             }else {
                 var_dump("Don't User") ;
                 exit() ;

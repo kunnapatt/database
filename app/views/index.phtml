@@ -87,13 +87,13 @@
                 <div class="collapse navbar-collapse" id="navbarNavb" >
                     <ul class="navbar-nav">
                         <?php echo $this->tag->linkTo('index', "<div style='color:white;padding:10px'><h5>Home</h5></div>") ?>
-                        <?php echo $this->tag->linkTo('officer/calendar', "<div style='color:white;padding:10px'><h5>Calendar</h5></div>") ?>
-                        <?php echo $this->tag->linkTo('officer/dept', "<div style='color:white;padding:10px'><h5>Dept</h5></div>") ?>
+                        <?php echo $this->tag->linkTo('officer/calendar?id=', "<div style='color:white;padding:10px'><h5>Calendar</h5></div>") ?>
+                        <?php echo $this->tag->linkTo('officer/dept?id=', "<div style='color:white;padding:10px'><h5>Dept</h5></div>") ?>
                         <?php echo $this->tag->linkTo('officer/customer?id=', "<div style='color:white;padding:10px'><h5>Customer</h5></div>") ?>
                         
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item float-md-right" style="padding:15px"><?php echo $this->tag->linkTo('officer/logout', '<button class="btn btn-secondary" style="padding:10px 20px">Logout</button>') ?></li>
+                        <li class="nav-item float-md-right" style="padding:15px"><?php echo $this->tag->linkTo('officer/logout', '<button class="btn btn-primary" style="padding:10px 20px">Logout</button>') ?></li>
                     </ul>
                 </div>
 
@@ -104,7 +104,7 @@
 
         <?php } else { ?>
             
-            <nav class="navbar navbar-expand-lg  " style="padding:10px 30px;background-color:rgb(255,155,0,0.8);color:black">
+            <nav class="navbar navbar-expand-lg " style="padding:10px 30px;background-color:rgb(255,155,0,0.8);color:black">
             <div class="container" >
                 <!-- <a class="navbar-brand" href="index" style="color:black">Logo</a> -->
                 <?php echo $this->tag->linkTo('index', "<div style='color:black;padding:10px'><h5>Logo</h5></div>") ?>
@@ -127,24 +127,11 @@
                     <li class="nav-item float-md-right" style="padding:15px"><?php echo $this->tag->linkTo('login', '<button class="btn btn-secondary" style="padding:10px 20px">Login</button>') ?></li>
                 </ul>
             </div>
-
             </div>
-            
         </nav>
-
-
-
         <?php } ?>
         
 
         <div class="container" style="padding:30px 20px">
             <?php echo $this->getContent(); ?>
         </div>
-
-        <!-- <?php 
-        // $co = $this->cookies->get("id") ; -->
-        // var_dump($co) ;
-        // exit ;
-        // ?>
-    </body>
-</html>

@@ -34,8 +34,8 @@ class Paying extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("paying");
-        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'customer'));
-        $this->belongsTo('loanid', 'LoanInformation', 'loanid', array('alias' => 'loan'));
+        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'alias_customers'));
+        $this->belongsTo('loanid', 'LoanInformation', 'loanid', array('alias' => 'alias_loan'));
         $this->hasManyToMany(
             'payingid',
             'Tracking',

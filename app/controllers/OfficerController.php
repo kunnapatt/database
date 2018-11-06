@@ -20,16 +20,10 @@
                     $officer = Officers::findFirst("username = '$id'") ;
 
                     if ( $officer->username != null ){
-                        // var_dump("easy") ;
-                        // exit() ;
-
                         if ( $officer->username == $id ) {
-
                             if ( $officer->pass == $pass ) { 
-
-
-                                $this->cookies->set("id", $officer->id , time()+86400 ) ;
-                                $this->session->set('id', "$id") ;
+                                $this->cookies->set("id", $officer->oid , time()+86400 ) ;
+                                $this->session->set('id', "$officer->oid") ;
                                 $this->response->redirect("officer/index") ;
                             }
                         }
@@ -48,101 +42,177 @@
         }
 
         public function customerAction() {
-            
-            $user = Customers::find() ;
+            if ( $this->session->has('id') != null ) {
+                $user = Customers::find() ;
 
-            foreach ( $user as $a ){
-                $b[] = $a->toArray() ;
-            }
-            foreach ( $b as $c ){
-                $cid[] = $c['cid'] ;
-                // $fname[] = $c['fname'] ;
-                // $sname[] = $c['sname'] ;
-                // $dob[] = $c['DOB'] ;
-                // $pnum[] = $c['pnumber'] ;
-                // $address[] = $c['homeaddress'] ;
-                // $work[] = $c['workaddress'] ;
-                // $email[] = $c['email'] ;
-                // $balance = $c['balance'] ;
+                foreach ( $user as $a ){
+                    $b[] = $a->toArray() ;
+                }
+                foreach ( $b as $c ){
+                    $cid[] = $c['cid'] ;
 
-            }
-            $this->view->cid = $cid ;
-            // $this->view->fname = $fname ;
-            // $this->view->sname = $sname ;
-            // $this->view->dob = $dob ;
-            // $this->view->pnum = $pnum ;
-            // $this->view->address = $address ;
-            // $this->view->work = $work ;
-            // $this->view->email = $email ;
-            // $this->view->balance = $balance ;
-            
-            if ( $_GET['id'] ){
-                $id = $_GET['id'] ;
-            }else {
-                $id = "" ;
-            }
+                }
+                $this->view->cid = $cid ;
 
-            if ( $id ) {
-                $cus = Customers::findFirst("cid = $id") ;
-
-                $cid = $cus->cid ;
-                $fname = $cus->fname ;
-                $sname = $cus->sname ;
-                $dob = $cus->DOB;
-                $pnum = $cus->pnumber ;
-                $address = $cus->homeaddress ;
-                $work = $cus->workaddress ;
-                $email = $cus->email ;
-                $balance = $cus->balance ;
-    
-                $this->view->id = $cid ;
-                $this->view->fname = $fname ;
-                $this->view->sname = $sname ;
-                $this->view->dob = $dob ;
-                $this->view->pnum = $pnum ;
-                $this->view->address = $address ;
-                $this->view->work = $work ;
-                $this->view->email = $email ;
-                $this->view->balance = $balance ;
-
-                $acc = $cus->getAccount()->getCredit()->toArray() ;
-                
-                foreach ( $acc as $a ){
-                $credit[] = $a['Creditcardnumber'] ;
+                if ( $_GET['id'] ){
+                    $id = $_GET['id'] ;
+                }else {
+                    $id = "" ;
                 }
 
-                $this->view->credit = $credit ;
+                if ( $id ) {
+                    $cus = Customers::findFirst("cid = $id") ;
 
-                $pay= $cus->getPaying()->toArray() ;
+                    $cid = $cus->cid ;
+                    $fname = $cus->fname ;
+                    $sname = $cus->sname ;
+                    $dob = $cus->DOB;
+                    $pnum = $cus->pnumber ;
+                    $address = $cus->homeaddress ;
+                    $work = $cus->workaddress ;
+                    $email = $cus->email ;
+                    $balance = $cus->balance ;
+        
+                    $this->view->id = $cid ;
+                    $this->view->fname = $fname ;
+                    $this->view->sname = $sname ;
+                    $this->view->dob = $dob ;
+                    $this->view->pnum = $pnum ;
+                    $this->view->address = $address ;
+                    $this->view->work = $work ;
+                    $this->view->email = $email ;
+                    $this->view->balance = $balance ;
 
-                foreach ( $pay as $a ){
-                    $amount[] = $a['amount'] ;
-                    $payid[] = $a['payingid'] ;
-                    $loanid[] = $a['loanid'] ;
-                    $datepay[] = $a['date'] ;
+                    $acc = $cus->getAccount()->getCredit()->toArray() ;
+                    
+                    foreach ( $acc as $a ){
+                    $credit[] = $a['Creditcardnumber'] ;
+                    }
+
+                    $this->view->credit = $credit ;
+
+                    $pay = $cus->getPaying()->toArray() ;
+
+                    foreach ( $pay as $a ){
+                        $amount[] = $a['amount'] ;
+                        $payid[] = $a['payingid'] ;
+                        $loanid[] = $a['loanid'] ;
+                        $datepay[] = $a['date'] ;
+                    }
+ 
+                    $this->view->amount = $amount ;
+                    $this->view->payid = $payid ;
+                    $this->view->loanid = $loanid ;
+                    $this->view->datepay = $datepay ;
+
+                    if ( $this->request->isPost() ) {
+                        $name = $this->request->getPost("name") ;
+                        $surname = $this->request->getPost("surname") ;
+                        $dateof = $this->request->getPost("dateof") ;
+                        $mail = $this->request->getPost("mail") ;
+                        $phone = $this->request->getPost("phone") ;
+                        $home = $this->request->getPost("home") ;
+                        $workat = $this->request->getPost("workat") ;
+
+                        $cus->fname = $name ;
+                        $cus->sname = $surname ;
+                        $cus->dob = $dateof;
+                        $cus->email =$mail ;
+                        $cus->pnumber = $phone ;
+                        $cus->homeaddress = $home ;
+                        $cus->workaddress = $workat ;
+
+                        $cus->save() ;
+
+                        $this->response->redirect('officer/customer&id=') ;
+                    }
                 }
-
                 
-                
-                $this->view->amount = $amount ;
-                $this->view->payid = $payid ;
-                $this->view->loanid = $loanid ;
-                $this->view->datepay = $datepay ;
-                 
-
-                
-
-            }else {
-                
+            } else {
+                $this->response->redirect("index") ;
             }
-            
-            // exit() ;
-            // var_dump($d['0']) ;
-            // exit() ;
         }
 
         public function deptAction() {
+            if ( $this->session->has('id') != null ){
+                $id = $this->session->get('id') ;
+                $officer = Officers::findFirst("oid = '$id'") ;
+                if ( $officer->getDept() != false ){
+                    $dept = $officer->getDept()->getTrack()->toArray() ;
+                    // var_dump($officer->getDept()) ;
+                    // exit() ;
+                    foreach( $dept as $a ){
+                        $cid[] = $a['cid'] ;
+                    }
 
+                    $this->view->cid = $cid ;
+
+                    $ci = $_GET['id'] ;
+                    if ( $ci ){
+                        $cus = Customers::findFirst("cid = '$ci'") ;
+                        $this->view->fname = $cus->fname ;
+                        $this->view->sname = $cus->sname ;
+                        $this->view->address = $cus->homeaddress ;
+                        $this->view->phone = $cus->pnumber ;
+                        $this->view->work = $cus->workaddress ;
+
+                        $paying = $cus->getPaying()->toArray() ;
+                        // $sum = $cus->getPaying()->getLoan()-toArray() ;
+                        
+                        foreach ( $paying as $a ){
+                            $date[] = $a['date'] ;
+                            $payid[] = $a['payingid'] ;
+                            $cusid[] = $a['cid'] ;
+                            $loanid[] = $a['loanid'] ;
+                            $bal[] = $a['amount'] ;
+                        }
+
+                        $this->view->date = $date ;
+                        $this->view->bal = $bal ;
+                        $this->view->payid = $payid ;
+                        $this->view->cusid = $cusid ;
+                        $this->view->loanid = $loanid ;
+                        
+                    }
+                }else {
+                    $this->response->redirect("index") ;
+                }       
+            }else{
+                $this->response->redirect("index") ;
+            } 
+                
+        }
+
+        public function calendarAction() {
+            if ( $this->session->has('id') != null ) {
+                $id = $this->session->get('id') ;
+                $cal = Officers::findFirst("oid = '$id'") ;
+                $calen = $cal->getCalendar() ;
+                //$cus = $cal->getCalendar()->getCustomer() ;
+
+                foreach ( $calen as $a ){
+                    $cusid[] = $a->getCustomer()->toArray() ;
+                    
+                }
+
+                foreach ( $cusid as $a ){
+                    // $cusidd[] = $a->getCustomer()->toArray() ;
+                }
+                // $this->view->cid = $cus ;
+                
+                // foreach ( $cus as $a ){
+                    // $fname[] = $name[]
+                // }
+                var_dump($cusid) ;
+                exit() ;
+                // $id = $_GET['id'] ;
+                // if ( $ ) {
+                    
+
+                // }
+            }else {
+                $this->response->redirect('index') ;
+            }
         }
     }
 
