@@ -1,34 +1,30 @@
 <html>
     <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        var url = "id" ;
-        var value = "" ;
-        $(document).ready( function () {
-            $("#selectcid").change(function () {
-                $(this).val() ;
-                value = $(this).val() ;
-                window.location.href = '?' + url + '=' + value + '&' ;
-            })
-        }) ;
-    </script>
+        <script>
+            var url = "id" ;
+            var value = "" ;
+            $(document).ready( function () {
+                $("#selectcid").change(function () {
+                    $(this).val() ;
+                    value = $(this).val() ;
+                    window.location.href = '?' + url + '=' + value + '&' ;
+                })
+            }) ;
+        </script>
 
     </head>
     <body style="background-color:#222;color:white">
-        <h2>Calendar</h2>
         <div class="row" style="padding:30px 0px">
-            <div class="col-10 mr-auto form-group">
-                <select class="form-control" id="selectcid" >
-                    <option selected disabled>Select Customer</option>
-                    <?php for ($i = 0 ; $i < count($cid) ; $i++ ) { ?>
-                        <option value="<?php echo $cid[$i] ?>"><?php echo $cid[$i] ?> </option>
-                    <?php } ?>
-                </select>
-            </div>                  
+            <div class="col-6">
+                <h2>Calendar</h2>
+            </div>
+            <div class="col-6" style="text-align:end">
+                <?php echo $this->tag->linkTo('officer/createcalendar?id=','<button class="btn btn-primary"><h5>Create</h5></button>')?>
+            </div>
         </div>
-        <?php if ( $_GET['id'] != null ) { ?>
-                
-                <div class="card" style="color:black">
+            <?php for ( $i = 0 ; $i < count($cid) ; $i++ ){ ?>
+                <div class="card" style="color:black;padding:30px 0px">
                     <div class="row">
                         <div class="col-3" style="text-align:center;padding:20px">
                             <span class="fas fa-user-circle fa-10x" style="height:100%"></span>
@@ -40,7 +36,7 @@
                                         Name :
                                     </div>
                                     <div class="col-6" style="">
-                                        <?php echo "$fname $sname" ?>
+                                        <?php echo "$fname[$i] $sname[$i]" ?>
                                     </div>
                                 </div>
                                 <div class="row" style="padding:10px 10px 0px">
@@ -48,7 +44,7 @@
                                         Phone :
                                     </div>
                                     <div class="col-6">
-                                        <?php echo $phone ?>
+                                        <?php echo $phone[$i] ?>
                                     </div>
                                 </div>
                                 <div class="row" style="padding:10px 10px 0px">
@@ -56,7 +52,7 @@
                                         Address :
                                     </div>
                                     <div class="col-6">
-                                        <?php echo $address ?>
+                                        <?php echo $address[$i] ?>
                                     </div>
                                 </div>
                                 <div class="row" style="padding:10px 10px 0px">
@@ -64,41 +60,26 @@
                                         Work :
                                     </div>
                                     <div class="col-6">
-                                        <?php echo $work ?>
+                                        <?php echo $work[$i] ?>
                                     </div>
                                 </div>
                             </h5>
                         </div>
                         <div class="col-3" style="padding:30px 80px;text-align:end">
-                            <!-- <h5>จ่ายแล้ว <?php echo array_sum($bal) ?></h5> -->
+                            <h5>
+                                <div class="row" style="padding:0px 0px 10px"> 
+                                    Date:
+                                </div>
+                                <div class="row">
+                                    <?php echo $calendar[$i] ?>
+                                </div>
+                            </h5>
                         </div>
                     </div>
                 </div>
                 <div style="padding-top:30px">
-                    <table class="table table-bordered table-light" style="color:black">
-                        <thead>
-                            <tr class="">
-                                <th scope="col">Date</th>
-                                <!-- <th scope="col">id</th> -->
-                                <th scope="col">Balance</th>
-                                <th scope="col">payingid</th>
-                                <th scope="col">loanid</th>
-                                <!-- <th scope="col">Address</th> -->
-                                <!-- <th scope="col">Email</th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <?php for ( $i = 0 ; $i < count($cusid) ; $i++ ) { ?>
-                                <tr>
-                                    <th scope="row"><?php echo $date[$i] ?></th>
-                                    <td><?php echo $bal[$i] ?></td>
-                                    <td><?php echo $payid[$i] ?></td>
-                                    <td><?php echo $loanid[$i] ?></td>
-                                </tr>
-                                <?php } ?>
-                        </tbody>
-                    </table>
+                    
                 </div>
-            <?php } ?>  
+            <?php } ?>
     </body>
 </html> 

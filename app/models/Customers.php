@@ -1,5 +1,5 @@
 <?php
-
+ 
 class Customers extends \Phalcon\Mvc\Model
 {
     public $cid;
@@ -17,6 +17,7 @@ class Customers extends \Phalcon\Mvc\Model
         $this->hasOne('cid','account','cid',array('alias' => 'alias_account'));
         $this->hasOne('cid','calendar','cid',array('alias' => 'alias_calendar'));
         $this->hasMany("cid", "Paying", "cid", array('alias' => 'alias_paying'));
+        $this->hasMany("cid", "LoanBy", "cid", array('alias' => 'alias_loanby'));
         $this->hasMany("cid", "CarryRequest", "cid", array('alias' => 'alias_request'));
         $this->hasManyToMany(
             'cid',
@@ -44,6 +45,10 @@ class Customers extends \Phalcon\Mvc\Model
     public function getLoan()
     {
         return $this->alias_loan;
+    }
+    public function getLoanBy()
+    {
+        return $this->alias_loanby;
     }
     public function getCalendar()
     {

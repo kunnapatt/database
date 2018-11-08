@@ -40,7 +40,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> 
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-
+        
         <!-- disable style -->
             
         <!--  -->
@@ -90,10 +90,12 @@
                         <?php echo $this->tag->linkTo('officer/calendar?id=', "<div style='color:white;padding:10px'><h5>Calendar</h5></div>") ?>
                         <?php echo $this->tag->linkTo('officer/dept?id=', "<div style='color:white;padding:10px'><h5>Dept</h5></div>") ?>
                         <?php echo $this->tag->linkTo('officer/customer?id=', "<div style='color:white;padding:10px'><h5>Customer</h5></div>") ?>
+                        <?php echo $this->tag->linkTo('officer/crm?id=', "<div style='color:white;padding:10px'><h5>Crm</h5></div>") ?>
                         
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item float-md-right" style="padding:15px"><?php echo $this->tag->linkTo('officer/logout', '<button class="btn btn-primary" style="padding:10px 20px">Logout</button>') ?></li>
+                        <li class="nav-item float-md-right" style="padding:10px" ><?php echo $this->tag->linkTo('officer/user', '<span class="fas fa-user-circle fa-3x" style="color:black"></span>') ?></li>
                     </ul>
                 </div>
 

@@ -13,8 +13,8 @@ class CarryRequest extends \Phalcon\Mvc\Model
     {
         $this->setSchema("mydb");
         $this->setSource("carry_request");
-        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'customers'));
-        $this->belongsTo('oid', 'CrmOfficer', 'oid', array('alias' => 'crm'));
+        $this->belongsTo('cid', 'Customers', 'cid', array('alias' => 'alias_customers'));
+        $this->belongsTo('oid', 'CrmOfficer', 'oid', array('alias' => 'alias_crm'));
     }
     public static function find($parameters = null)
     {

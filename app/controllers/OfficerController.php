@@ -188,30 +188,110 @@
                 $id = $this->session->get('id') ;
                 $cal = Officers::findFirst("oid = '$id'") ;
                 $calen = $cal->getCalendar() ;
-                //$cus = $cal->getCalendar()->getCustomer() ;
 
                 foreach ( $calen as $a ){
-                    $cusid[] = $a->getCustomer()->toArray() ;
-                    
+                    $cusid[] = $a->getCustomer() ;
+                    $cus[] = $a->cid ;
+                    $date[] = $a->date ;
                 }
 
-                foreach ( $cusid as $a ){
-                    // $cusidd[] = $a->getCustomer()->toArray() ;
-                }
-                // $this->view->cid = $cus ;
-                
-                // foreach ( $cus as $a ){
-                    // $fname[] = $name[]
-                // }
-                var_dump($cusid) ;
-                exit() ;
-                // $id = $_GET['id'] ;
-                // if ( $ ) {
-                    
+                // var_dump($cus);
+                // exit() ;
 
-                // }
+                $this->view->cid = $cus ;
+
+                foreach( $cusid as $a ){
+                    $fname[] = $a->fname ;
+                    $sname[] = $a->sname ;
+                    $phone[] = $a->pnumber ;
+                    $address[] = $a->homeaddress ;
+                    $work[] = $a->workaddress ;
+                }
+
+                $this->view->fname = $fname ;
+                $this->view->sname = $sname ;
+                $this->view->phone = $phone ;
+                $this->view->address = $address ;
+                $this->view->work = $work ;    
+                // $this->view->cid = $cusid ;
+                $this->view->calendar = $date ;
+            
             }else {
                 $this->response->redirect('index') ;
+            }
+        }
+
+        public function crmAction() {
+            if ( $this->session->has('id') ){
+                $id = $this->session->get('id') ;
+                $off = Officers::findFirst("oid = '$id'") ;
+                $offic = $off->getCrm()->getRequest() ;
+                
+                foreach( $offic as $a ){
+                    $cusid[] = $a->getCustomers() ;
+                    $ticket[] = $a->ticket_id ;
+                    $request[] = $a->request ; 
+                }
+
+                foreach( $cusid as $a ){
+                    $fname[] = $a->fname ;
+                    $sname[] = $a->sname ;
+                }
+
+                $this->view->mess = $request ;
+                $this->view->ticket = $ticket ;
+                $this->view->fname = $fname ;
+                $this->view->sname = $sname ;
+
+                $idd = $_GET['id'] ;
+                if ( $idd != null ){
+                $crm = CarryRequest::findFirst("ticket_id = '$idd'") ;
+                $crm->delete() ;
+                }
+            }
+        }
+
+        public function createcalendarAction() {
+            if ( $this->session->has('id') ){
+                $id = $this->session->get('id') ;
+                $off = Officers::findFirst("oid = '$id'") ;
+                $offic = $off->getCalendar() ;
+
+                foreach ( $offic as $a ){
+                    $cus[] = $a->getCustomer() ;
+                }
+
+                foreach ( $cus as $a ){
+                    $cusid[] = $a->cid ;
+                }
+
+                $this->view->cusid = $cusid ;
+
+                $idd = $_GET['id'] ;
+                if ( $idd != null ) {
+                    if ( $this->request->isPost() ) {
+                        // var_dump("Hello World") ;
+                        // exit() ;
+                        $datecal = $this->request->getPost("datecal") ;
+                        $datecal1 = Calendar::findFirst("cid = '$idd'") ;
+                        // var_dump($datecal1->date);
+                        // exit() ;
+                        $datecal1->date = $datecal ;
+                        $datecal1->save() ;
+                        // var_dump($datecal) ;
+                        // exit() ;
+                    }
+                }
+            }
+        }
+
+        public function userAction() {
+            if ( $this->session->has('id') ){
+                $id = $this->session->get('id') ;
+                $us = Officers::findFirst("oid = '$id'") ;
+
+                var_dump($us) ;
+                exit() ;
             }
         }
     }
